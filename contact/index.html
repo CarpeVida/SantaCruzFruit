@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Santa Cruz Fruit</title>
+    <meta
+      name="description"
+      content="Contact Santa Cruz Fruit to discuss orchard design, grafting workshops, and fruit tree consulting."
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="../index.html">Santa Cruz Fruit</a>
+        <nav>
+          <a href="../index.html">Home</a>
+          <a href="../about/">About</a>
+          <a href="../blog/">Blog</a>
+          <a href="../contact/">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-intro">
+        <div class="container">
+          <h1>Contact</h1>
+          <p class="lead">
+            Send a quick note and I will follow up.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <form
+            class="form"
+            action="mailto:your-email@example.com"
+            method="POST"
+            enctype="text/plain"
+          >
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" required />
+            </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+
+            <div>
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell me a bit about your project."
+                required
+              ></textarea>
+            </div>
+
+            <button class="button" type="submit">Send Inquiry</button>
+          </form>
+          <p class="note">
+            This opens your email app and prepares a message.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-sitemap">
+          <nav>
+            <a href="../index.html">Home</a>
+            <a href="../about/">About</a>
+            <a href="../blog/">Blog</a>
+            <a href="../contact/">Contact</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
