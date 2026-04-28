@@ -309,6 +309,10 @@ textarea {
   font-size: 0.95rem;
 }
 
+.note-error {
+  color: #8d2c23;
+}
+
 @media (max-width: 700px) {
   .nav-wrap {
     flex-direction: column;

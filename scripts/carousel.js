@@ -17,6 +17,14 @@ const imageEl = document.getElementById('carousel-image');
 const prevEl = document.getElementById('carousel-prev');
 const nextEl = document.getElementById('carousel-next');
 const statusEl = document.getElementById('carousel-status');
+const AUTO_ADVANCE_MS = 2800;
+
+const preloadPhotos = () => {
+  photos.forEach((photo) => {
+    const preloadedImage = new Image();
+    preloadedImage.src = photo;
+  });
+};
 
 if (imageEl && prevEl && nextEl && statusEl && photos.length > 0) {
   let index = 0;
@@ -37,11 +45,11 @@ if (imageEl && prevEl && nextEl && statusEl && photos.length > 0) {
     render();
   };
 
-  let timer = window.setInterval(goNext, 4500);
+  let timer = window.setInterval(goNext, AUTO_ADVANCE_MS);
 
   const resetTimer = () => {
     window.clearInterval(timer);
-    timer = window.setInterval(goNext, 4500);
+    timer = window.setInterval(goNext, AUTO_ADVANCE_MS);
   };
 
   nextEl.addEventListener('click', () => {
@@ -55,4 +63,5 @@ if (imageEl && prevEl && nextEl && statusEl && photos.length > 0) {
   });
 
   render();
+  preloadPhotos();
 }
