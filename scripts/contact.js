@@ -1,32 +1,51 @@
 const formEl = document.getElementById('contact-form');
 const noteEl = document.getElementById('contact-note');
+const submitEl = document.getElementById('contact-submit');
+const recipientParts = ['danielschmelter', 'gmail', 'com'];
 
-if (formEl && noteEl) {
-  formEl.addEventListener('submit', (event) => {
+const formAction = recipientParts.reduce((address, part, index) => {
+  if (index === 0) {
+    return part;
+  }
+
+  if (index === 1) {
+    return `${address}@${part}`;
+  }
+
+  return `${address}.${part}`;
+}, '');
+
+if (formEl && noteEl && submitEl) {
+  formEl.action = `https://formsubmit.co/ajax/${formAction}`;
+
+  formEl.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const recipient = (formEl.dataset.recipient || '').trim();
-
-    if (!recipient || recipient === 'your-email@example.com') {
-      noteEl.textContent =
-        'Contact email is not configured yet. Update the form recipient to enable inquiries.';
-      noteEl.classList.add('note-error');
-      return;
-    }
-
-    const formData = new FormData(formEl);
-    const name = (formData.get('name') || '').toString().trim();
-    const email = (formData.get('email') || '').toString().trim();
-    const message = (formData.get('message') || '').toString().trim();
-
-    const subject = encodeURIComponent(`Santa Cruz Fruit inquiry from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    );
-
-    noteEl.textContent = 'Opening your default mail app now.';
+    submitEl.disabled = true;
     noteEl.classList.remove('note-error');
+    noteEl.textContent = 'Sending inquiry...';
 
-    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    try {
+      const response = await fetch(formEl.action, {
+        method: formEl.method,
+        headers: {
+          Accept: 'application/json',
+        },
+        body: new FormData(formEl),
+      });
+
+      if (!response.ok) {
+        throw new Error('Request failed');
+      }
+
+      formEl.reset();
+      noteEl.textContent = 'Inquiry sent. I will follow up soon.';
+    } catch (error) {
+      noteEl.classList.add('note-error');
+      noteEl.textContent =
+        'Inquiry could not be sent right now. Please try again in a moment.';
+    } finally {
+      submitEl.disabled = false;
+    }
   });
 }

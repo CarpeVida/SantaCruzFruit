@@ -38,8 +38,18 @@
           <form
             class="form"
             id="contact-form"
-            data-recipient="danielschmelter@gmail.com"
+            method="POST"
           >
+            <input type="hidden" name="_subject" value="Santa Cruz Fruit inquiry" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input
+              type="text"
+              name="_honey"
+              class="sr-only"
+              tabindex="-1"
+              autocomplete="off"
+            />
             <div>
               <label for="name">Name</label>
               <input id="name" name="name" type="text" required />
@@ -60,11 +70,10 @@
               ></textarea>
             </div>
 
-            <button class="button" type="submit">Send Inquiry</button>
+            <button class="button" id="contact-submit" type="submit">Send Message</button>
           </form>
           <p class="note" id="contact-note" aria-live="polite">
-            This prepares an email in your default mail app without submitting
-            insecure form data through the browser.
+            Send your inquiry directly from this page.
           </p>
         </div>
       </section>
